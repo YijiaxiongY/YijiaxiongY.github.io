@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构课课设———四维数组">
+<meta property="og:url" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/低下标优先.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/高下标优先.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/映像函数.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/起始界面.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/创建四维数组.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/查看当前数组信息.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/下标转换为索引值.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/降维操作.png">
+<meta property="og:updated_time" content="2019-01-11T14:24:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构课课设———四维数组">
+<meta name="twitter:description" content="这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/数据结构课课设———四维数组/低下标优先.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/">
+
+
+
+
+
+  <title>数据结构课课设———四维数组 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collection">
+          <a href="/collection/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-angellist"></i> <br>
+            
+            collection
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/数据结构课课设———四维数组/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构课课设———四维数组</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-11T13:26:12+08:00">
+                2019-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index">
+                    <span itemprop="name">C/C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/11/数据结构课课设———四维数组/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/11/数据结构课课设———四维数组/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。</p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol>
+<li>按照行优先顺序将输入的数据建成4维数组，按照列优先顺序输出结果；</li>
+<li>给出任意处的元素值，并给出对应的一维数组中的序号；</li>
+<li>用 <code>squeeze</code> 函数来消除数组中的”孤维”，即大小等于1的维，从而起到降维的作用；</li>
+<li>用 <code>sub2ind</code> 函数将下标转换为单一索引数值；</li>
+<li>用 <code>ind2sub</code> 函数将数组的单一索引数值转换为数组的下标。</li>
+</ol>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="1-行优先存储与列优先存储"><a href="#1-行优先存储与列优先存储" class="headerlink" title="1.行优先存储与列优先存储"></a>1.行优先存储与列优先存储</h3><p>说到存储，计算机的存储方式只有两种，<strong>物理结构</strong>——顺序存储结构和链式存储结构。而一切数据结构中的类型，如栈、队列、二叉树、图等都是使用这两种存储结构进行实现与表示的，这些结构都是<strong>逻辑上的结构</strong>，同样的，数组，无论多少维度都是采用这两种物理结构实现的，其在内存之中都只是一堆连续或者不连续的数据。</p>
+<p>对于多维数组来说，存储的顺序可以不同，因为其下标不止一个，存储数据的先后次序也就可以不一样。</p>
+<p>举个栗子，二维数组。行优先存储，优先存储每一行，依次向后，对应的下标变换为<code>a[0][0]</code>至<code>a[0][1]</code>至<code>a[0][2]</code>…。低下标先开始变化，直至结束。因此，<strong>以行序为主序存储方式也称为低下标优先</strong>。C语言采用的就是这种方式。</p>
+<p><img src="数据结构课课设———四维数组/低下标优先.png" alt="低下标优先"></p>
+<p>列优先存储，优先存储每一列，依次向后，对应的下标变换为<code>a[0][0]</code>至<code>a[1][0]</code>至<code>a[2][0]</code>…。高下标先开始变化，直至结束。因此，<strong>以列序为主序存储方式也称为高下标优先</strong>。Matlab采用的就是这种方式。</p>
+<p><img src="数据结构课课设———四维数组/高下标优先.png" alt="高下标优先"></p>
+<p>参考链接</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/baiyu9821179/article/details/74852984" target="_blank" rel="noopener">行优先存储和列优先存储</a></p>
+<p><a href="https://blog.csdn.net/Canhui_WANG/article/details/52242496" target="_blank" rel="noopener">行优先和列优先的原则问题——Matlab</a></p>
+</blockquote>
+<h3 id="2-C语言多维数组的理解"><a href="#2-C语言多维数组的理解" class="headerlink" title="2.C语言多维数组的理解"></a>2.C语言多维数组的理解</h3><p>C语言数组，是一个用于存储固定大小的相同类型元素的集合。</p>
+<pre><code>int a[4] = {0,1,2,3};
+int b[2][4] = {
+                {0,1,2,3},
+                {4,5,6,7}
+              };
+</code></pre><p>如上所示的一维数组，基本元素是<code>int</code>类型的数据，这个数组可称为<strong>int类型数据的数组</strong>。而二维数组，基本元素是<code>int</code>类型数据的数组，这个数组可称为<strong>一维数组的数组</strong>。同理，n维数组的基本元素就是n-1维数组。</p>
+<p>声明数组 <code>int c[3][4][5];</code> 表示数组 c 包含三个元素: <code>c[0],c[1],c[2]</code> ，而这每一个元素又都是二维数组，而每一个二维数组又包含四个元素——一维数组。</p>
+<p>参考链接</p>
+<blockquote>
+<p><a href="http://c.biancheng.net/view/356.html" target="_blank" rel="noopener">C语言多维数组，以及多维数组中的二维数组</a></p>
+</blockquote>
+<h3 id="3-几个名词：维度、维界与孤维（未找到定义，自己的理解）"><a href="#3-几个名词：维度、维界与孤维（未找到定义，自己的理解）" class="headerlink" title="3.几个名词：维度、维界与孤维（未找到定义，自己的理解）"></a>3.几个名词：维度、维界与孤维（未找到定义，自己的理解）</h3><ul>
+<li><p>维度：几维数组对应的维度就是几。如 <code>int c[3][4][5];</code> 是三维数组。</p>
+</li>
+<li><p>维界：对应每一个维度的范围，一般下界为0。如 <code>int c[3][4][5];</code> ，其第三维维界为0至2。</p>
+</li>
+<li><p>孤维，就是维界只能存储数量为1的维度，如 <code>int c[3][1][5];</code> ，共能存放15个数据，而<code>int c[3][5];</code> 也是存放15个数据，故可以消除孤维，来简化多维数组。</p>
+</li>
+</ul>
+<h2 id="数据结构与核心算法"><a href="#数据结构与核心算法" class="headerlink" title="数据结构与核心算法"></a>数据结构与核心算法</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>采用<strong>顺序存储</strong>的方式来存储数组：</p>
+<ol>
+<li>一旦建立数组，数组存储的数量和结构中的元素之间的关系不需要再发生变化。</li>
+<li>不需要插入和删除操作，还需要实现随机存取（<code>时间复杂度为O(1)</code>）。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//参考自《数据结构》清华大学出版社 严蔚敏</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType * base;	<span class="comment">//元素基址,ElemType为此数组要存储的数据类型</span></span><br><span class="line">	<span class="keyword">int</span> dim;			<span class="comment">//维数</span></span><br><span class="line">	<span class="keyword">int</span> elemtotal;		<span class="comment">//总数</span></span><br><span class="line">	<span class="keyword">int</span> * bounds;		<span class="comment">//数组各个维界</span></span><br><span class="line">	<span class="keyword">int</span> * constants;	<span class="comment">//映像函数常量基址，参看映像函数⬇</span></span><br><span class="line">&#125;Array;</span><br></pre></td></tr></table></figure> 
+<h3 id="核心算法——映像函数"><a href="#核心算法——映像函数" class="headerlink" title="核心算法——映像函数"></a>核心算法——映像函数</h3><p>映像函数是为了便于计算多维下标对应的内存基址。由于四维数组只是逻辑上的四维数组，其在内存上的真实分配情况也只是顺序存储结构，为了实现四维数组随机存取的特点，就要使用映像函数求得其地址。故上述结构体中 <code>int * constants</code> 的存在就是为了使得计算方便。</p>
+<p>例如：<code>int c[3][4][5]</code> 这个三维数组，按照行优先存储，下标(1,2,3)对应的基址如何求得呢？<br><code>LOC(1，2，3) = 首元素基址 + 1 * 4 * 5 + 2 * 5 + 5 * 1</code> 。而这里的 <code>int * constants</code> 就是把<strong>每一个维度能存储的元素个数</strong>存储了下来。对于 <code>int c[3][4][5]</code> 它的第三维包含三个元素 <code>c[0][4][5]、c[1][4][5]、c[2][4][5]</code>，每个元素都能存储 <code>4 * 5 = 20</code> 个元素，第三维下标为1，故<code>1 * 4 *5 = 20</code> ,其余同理。</p>
+<p>故使用 <code>int * constants</code> 来作为映像函数常量基址，每个 <code>A.constands[i]</code> 代表比 <code>dim - i</code> 低一维的所有元素的个数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A.constants = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(A.dim * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">A.constants[A.dim - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = A.dim - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">&#123;</span><br><span class="line">	A.constants[i] = A.bounds[i + <span class="number">1</span>] * A.constants[i + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<p>映像函数如下图<br><img src="数据结构课课设———四维数组/映像函数.png" alt="映像函数"></p>
+<p>计算方法，求四维下标(a,b,c,d)对应的基址：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ind = base + A.constants[<span class="number">0</span>] * a + A.constants[<span class="number">1</span>] * b + A.constants[<span class="number">2</span>] * c + A.constants[<span class="number">3</span>] * d;</span><br></pre></td></tr></table></figure> </p>
+<p>参考链接</p>
+<blockquote>
+<p><a href="https://zhidao.baidu.com/question/121166265.html" title="百度知道" target="_blank" rel="noopener">C语言中什么是数组映像函数常量基址</a></p>
+</blockquote>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><p>我的代码分文件编程，<code>Array.h</code> 是关于数据结构的定义与声明，<code>Array.cpp</code> 是关于<code>Array.h</code> 内函数的实现，<code>main.cpp</code> 是运用这些函数进行流程控制之后的演示。编译环境是<code>VS2013</code>。</p>
+<h3 id="Array-h"><a href="#Array-h" class="headerlink" title="Array.h"></a>Array.h</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once	<span class="comment">//防止头文件重复</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OVERFLO -1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 8		<span class="comment">//维界最大值为8</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Status;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType * base;	<span class="comment">//元素基址</span></span><br><span class="line">	<span class="keyword">int</span> dim;			<span class="comment">//维数</span></span><br><span class="line">	<span class="keyword">int</span> elemtotal;		<span class="comment">//总数</span></span><br><span class="line">	<span class="keyword">int</span> * bounds;		<span class="comment">//数组各个维界</span></span><br><span class="line">	<span class="keyword">int</span> * constants;	<span class="comment">//映像函数常量基址</span></span><br><span class="line">&#125;Array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> b;</span><br><span class="line">	<span class="keyword">int</span> c;</span><br><span class="line">	<span class="keyword">int</span> d;</span><br><span class="line">&#125;Sub;<span class="comment">//四维数组下标结构体</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1.建立数组</span></span><br><span class="line"><span class="function">Status <span class="title">InitArray</span><span class="params">(Array &amp;A, <span class="keyword">int</span> dim, <span class="keyword">int</span> *boundary)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.按照行优先顺序存储数据</span></span><br><span class="line"><span class="function">Status <span class="title">ValueArray</span><span class="params">(Array &amp;A)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.行优先顺序输出结果</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArrayByRow</span><span class="params">(Array &amp;A)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4.列优先顺序输出结果</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArrayByCol</span><span class="params">(Array &amp;A)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.给定下标求取对应下标的元素</span></span><br><span class="line"><span class="function">Status <span class="title">GetValue</span><span class="params">(Array A, Sub sub,ElemType &amp;elem)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6.给定下标求取对应一维数组的序号（sub2ind）</span></span><br><span class="line"><span class="function">Status <span class="title">sub2ind</span><span class="params">(Array A,Sub sub,<span class="keyword">int</span> &amp;ind)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//7.给定一位数组的单一索引值抓换成数组下标（ind2sub）</span></span><br><span class="line"><span class="function">Status <span class="title">ind2sub</span><span class="params">(Array A, <span class="keyword">int</span> ind, Sub &amp;sub)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//8.消除孤维（squeeze）</span></span><br><span class="line"><span class="function">Status <span class="title">squeeze</span><span class="params">(Array A, Array &amp;B)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//9.显示当前数组信息</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowDate</span><span class="params">(Array A)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//10.销毁数组</span></span><br><span class="line"><span class="function">Status <span class="title">DestroyArray</span><span class="params">(Array &amp;A)</span></span>;</span><br></pre></td></tr></table></figure> 
+<h3 id="Array-cpp"><a href="#Array-cpp" class="headerlink" title="Array.cpp"></a>Array.cpp</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Array.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1.建立数组</span></span><br><span class="line"><span class="function">Status <span class="title">InitArray</span><span class="params">(Array &amp;A, <span class="keyword">int</span> dim, <span class="keyword">int</span> *boundary)</span><span class="comment">//此处的boundary形参为数组，便于在main函数中检验数据是否正常，便于传参。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (dim&lt;<span class="number">0</span> || dim&gt;MAX) <span class="keyword">return</span> ERROR;</span><br><span class="line">	A.dim = dim;</span><br><span class="line">	A.bounds = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(dim*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	<span class="keyword">if</span> (!A.bounds) <span class="built_in">exit</span>(OVERFLO);</span><br><span class="line">	A.elemtotal = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dim; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		A.bounds[i] = boundary[i];</span><br><span class="line">		A.elemtotal *= A.bounds[i];</span><br><span class="line">	&#125;</span><br><span class="line">	A.base = (ElemType *)<span class="built_in">malloc</span>(A.elemtotal * <span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">	<span class="keyword">if</span> (!A.base) <span class="built_in">exit</span>(OVERFLO);</span><br><span class="line">	A.constants = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(A.dim * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	<span class="keyword">if</span> (!A.constants) <span class="built_in">exit</span>(OVERFLO);</span><br><span class="line">	A.constants[A.dim - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = A.dim - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">	&#123;</span><br><span class="line">		A.constants[i] = A.bounds[i + <span class="number">1</span>] * A.constants[i + <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.按照行优先顺序存储数据</span></span><br><span class="line"><span class="function">Status <span class="title">ValueArray</span><span class="params">(Array &amp;A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"您一共要输入 "</span> &lt;&lt; A.elemtotal &lt;&lt; <span class="string">" 个数据（int类型）"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.elemtotal; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; A.base[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.行优先顺序输出结果</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArrayByRow</span><span class="params">(Array &amp;A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"按照行优先顺序输出结果"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.elemtotal; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; A.base[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4.列优先顺序输出结果</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArrayByCol</span><span class="params">(Array &amp;A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//本程序采用的是行优先存储方式创建的，对于所谓的列优先输出，因为列优先也就是高下标优先，所以按照高下标的遍历方式，依次将四维下标转换成一维基址(sub2ind函数)，然后输出。</span></span><br><span class="line">	<span class="keyword">int</span> ind;</span><br><span class="line">	Sub sub;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"按照列优先顺序输出结果"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (sub.d = <span class="number">0</span>; sub.d &lt; A.bounds[<span class="number">3</span>]; ++sub.d)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (sub.c = <span class="number">0</span>; sub.c &lt; A.bounds[<span class="number">2</span>]; ++sub.c)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (sub.b = <span class="number">0</span>; sub.b &lt; A.bounds[<span class="number">1</span>]; ++sub.b)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (sub.a = <span class="number">0</span>; sub.a &lt; A.bounds[<span class="number">0</span>]; ++sub.a)</span><br><span class="line">				&#123;</span><br><span class="line">					sub2ind(A, sub, ind);</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; A.base[ind] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.给定下标求取对应下标的元素</span></span><br><span class="line"><span class="function">Status <span class="title">GetValue</span><span class="params">(Array A, Sub sub, ElemType &amp;elem)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ((sub.a&lt;<span class="number">0</span> || sub.a&gt;A.bounds[<span class="number">0</span>] - <span class="number">1</span>) || (sub.b&lt;<span class="number">0</span> || sub.b&gt;A.bounds[<span class="number">1</span>] - <span class="number">1</span>) || (sub.c&lt;<span class="number">0</span> || sub.c&gt;A.bounds[<span class="number">2</span>] - <span class="number">1</span>) || (sub.d&lt;<span class="number">0</span> || sub.d&gt;A.bounds[<span class="number">3</span>] - <span class="number">1</span>)) <span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="keyword">int</span> ind;</span><br><span class="line">	sub2ind(A, sub, ind);</span><br><span class="line">	elem = A.base[ind];</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6.给定下标求取对应一维数组的序号（sub2ind）</span></span><br><span class="line"><span class="function">Status <span class="title">sub2ind</span><span class="params">(Array A, Sub sub, <span class="keyword">int</span> &amp;ind)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ((sub.a&lt;<span class="number">0</span> || sub.a&gt;A.bounds[<span class="number">0</span>] - <span class="number">1</span>) || (sub.b&lt;<span class="number">0</span> || sub.b&gt;A.bounds[<span class="number">1</span>] - <span class="number">1</span>) || (sub.c&lt;<span class="number">0</span> || sub.c&gt;A.bounds[<span class="number">2</span>] - <span class="number">1</span>) || (sub.d&lt;<span class="number">0</span> || sub.d&gt;A.bounds[<span class="number">3</span>] - <span class="number">1</span>)) <span class="keyword">return</span> ERROR;</span><br><span class="line">	ind = <span class="number">0</span>;</span><br><span class="line">	ind += A.constants[<span class="number">0</span>] * sub.a;</span><br><span class="line">	ind += A.constants[<span class="number">1</span>] * sub.b;</span><br><span class="line">	ind += A.constants[<span class="number">2</span>] * sub.c;</span><br><span class="line">	ind += A.constants[<span class="number">3</span>] * sub.d;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//7.给定一位数组的单一索引值抓换成数组下标（ind2sub）</span></span><br><span class="line"><span class="function">Status <span class="title">ind2sub</span><span class="params">(Array A, <span class="keyword">int</span> ind, Sub &amp;sub)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//相关解释请参看底下注意事项第7条</span></span><br><span class="line">	<span class="keyword">if</span> (ind&lt;<span class="number">0</span> || ind&gt;A.elemtotal - <span class="number">1</span>) <span class="keyword">return</span> ERROR;</span><br><span class="line">	sub.a = ind / A.constants[<span class="number">0</span>];</span><br><span class="line">	sub.b = (ind % A.constants[<span class="number">0</span>]) / (A.constants[<span class="number">1</span>]);</span><br><span class="line">	sub.c = ((ind % A.constants[<span class="number">0</span>]) % (A.constants[<span class="number">1</span>])) / A.constants[<span class="number">2</span>];</span><br><span class="line">	sub.d = (((ind % A.constants[<span class="number">0</span>]) % (A.constants[<span class="number">1</span>])) % A.constants[<span class="number">2</span>]) % A.constants[<span class="number">2</span>];</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//8.消除孤维（squeeze）</span></span><br><span class="line"><span class="function">Status <span class="title">squeeze</span><span class="params">(Array A,Array &amp;B)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">bool</span> is = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">int</span> dim = A.dim;</span><br><span class="line">	<span class="keyword">int</span> boundary[MAX];</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.dim; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (A.bounds[i] == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			is = <span class="literal">true</span>;</span><br><span class="line">			--dim;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			boundary[j] = A.bounds[i];</span><br><span class="line">			++j;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!is) <span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (dim == <span class="number">0</span>) <span class="comment">//防止全是1维界的情况</span></span><br><span class="line">		&#123;</span><br><span class="line">			dim = <span class="number">1</span>;</span><br><span class="line">			boundary[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		InitArray(B, dim, boundary);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.elemtotal; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			B.base[i] = A.base[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> OK;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//9.显示当前数组信息</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowDate</span><span class="params">(Array A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"-------------------------------------------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"                当前数组信息                  "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t维数："</span> &lt;&lt; A.dim &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t形如A[a][b][c][d]这样的形式，当前数组对应的各维维度是"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.dim; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt;<span class="string">"\t"</span>&lt;&lt; <span class="keyword">char</span>(<span class="string">'a'</span> + i) &lt;&lt; <span class="string">" :"</span> &lt;&lt; A.bounds[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t数据总数是"</span> &lt;&lt; A.elemtotal &lt;&lt; <span class="built_in">endl</span>&lt;&lt;<span class="string">"\t"</span>;</span><br><span class="line">	PrintArrayByRow(A);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"----------------------END------------------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//10.销毁数组</span></span><br><span class="line"><span class="function">Status <span class="title">DestroyArray</span><span class="params">(Array &amp;A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!A.base) <span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="built_in">free</span>(A.base); A.base = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span> (!A.bounds) <span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="built_in">free</span>(A.bounds); A.bounds = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span> (!A.constants) <span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="built_in">free</span>(A.constants); A.constants = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<h3 id="main-cpp"><a href="#main-cpp" class="headerlink" title="main.cpp"></a>main.cpp</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Array.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	system(<span class="string">"color 3E"</span>);<span class="comment">//设置控制台背景颜色和字体颜色</span></span><br><span class="line">	<span class="keyword">int</span> inso;<span class="comment">//需要输入的值，用于流程控制</span></span><br><span class="line">	<span class="keyword">int</span> inso1;<span class="comment">//需要输入的值，用于流程控制</span></span><br><span class="line">	<span class="keyword">char</span> ch;<span class="comment">//需要输入的值，用于流程控制</span></span><br><span class="line">	Array A;</span><br><span class="line">	A.elemtotal = <span class="number">0</span>;<span class="comment">//用于判断是否创建了四维数组，便于流程控制</span></span><br><span class="line">	Array B;</span><br><span class="line">	Sub sub;<span class="comment">//定义一个四维数据</span></span><br><span class="line">	<span class="keyword">int</span> ind;<span class="comment">//定义一个一维数据</span></span><br><span class="line">	<span class="keyword">bool</span> creat = <span class="literal">false</span>;<span class="comment">//用于判断降维数组是否成功</span></span><br><span class="line">	ElemType elem;<span class="comment">//定义一个数组元素类型的数据</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t欢迎使用四维数组程序"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"+------------------------------------------+"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t1.创建四维数组                     |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t2.查看四维数组信息                 |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t3.输入下标查看四维数组值           |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t4.按照行优先顺序打印               |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t5.按照列优先顺序打印               |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t6.将下标转换为单一索引数值；       |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t7.将单一索引数值转换为数组的下标； |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t8.降维\t\t                   |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"|\t9.退出\t\t                   |"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"+------------------------------------------+"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入相关序号执行操作"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Input:"</span>;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; inso;</span><br><span class="line">		<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (inso == <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"将创建形如 A[a][b][c][d] 形式的四维数组，请依次输入个维度对应的维界值\n各维对应的值应当大于零！请严格输入"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				<span class="keyword">int</span> boundary[MAX];<span class="comment">//存放各个维度对应的维界</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">"\t"</span> &lt;&lt; <span class="keyword">char</span>(<span class="string">'a'</span> + i) &lt;&lt; <span class="string">" :"</span>;</span><br><span class="line">					too: <span class="built_in">cin</span> &gt;&gt; inso1;</span><br><span class="line">					<span class="keyword">if</span> (inso1 &lt;= <span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入错误，不符合要求，请重新输入:"</span>;</span><br><span class="line">						<span class="keyword">goto</span> too;</span><br><span class="line">					&#125;</span><br><span class="line">					boundary[i] = inso1;</span><br><span class="line">				&#125;</span><br><span class="line">				InitArray(A, <span class="number">4</span>, boundary);<span class="comment">//数组作为参数传入</span></span><br><span class="line">				ValueArray(A);</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"-----四维数组创建成功!-----"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (inso == <span class="number">2</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" 四维数组还未创建，请您前去创建四维数组！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> ShowDate(A);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(inso == <span class="number">3</span>)&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" 四维数组还未创建，请您前去创建四维数组！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" 请输入你要查看的下标值，共四个数据"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" 形如 A[a][b][c][d] ，各个下标对应的取值范围"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" a: 0 - "</span> &lt;&lt; A.bounds[<span class="number">0</span>]<span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" b: 0 - "</span> &lt;&lt; A.bounds[<span class="number">1</span>]<span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" c: 0 - "</span> &lt;&lt; A.bounds[<span class="number">2</span>]<span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" d: 0 - "</span> &lt;&lt; A.bounds[<span class="number">3</span>]<span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cin</span> &gt;&gt; sub.a &gt;&gt; sub.b &gt;&gt; sub.c &gt;&gt; sub.d;</span><br><span class="line">						<span class="keyword">if</span> (GetValue(A, sub, elem))</span><br><span class="line">						&#123;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">" 下标 A["</span> &lt;&lt; sub.a &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.b &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.c &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.d &lt;&lt; <span class="string">"]对应的值为: "</span> &lt;&lt; elem &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">"是否继续查看？（N键退出查看，其余键继续）:"</span>;</span><br><span class="line">							<span class="built_in">cin</span> &gt;&gt; ch;</span><br><span class="line">							<span class="keyword">if</span> (ch == <span class="string">'n'</span> || ch == <span class="string">'N'</span>)</span><br><span class="line">								<span class="keyword">break</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">" 您输入的数据有误，请重新输入"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (inso == <span class="number">4</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" 四维数组还未创建，请您前去创建四维数组！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					PrintArrayByRow(A);</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (inso == <span class="number">5</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" 四维数组还未创建，请您前去创建四维数组！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					PrintArrayByCol(A);</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (inso == <span class="number">6</span>)&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" 四维数组还未创建，请您前去创建四维数组！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" 请输入你要转换的下标值，共四个数据"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" 形如 A[a][b][c][d] ，各个下标对应的取值范围"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" a: 0 - "</span> &lt;&lt; A.bounds[<span class="number">0</span>] - <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" b: 0 - "</span> &lt;&lt; A.bounds[<span class="number">1</span>] - <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" c: 0 - "</span> &lt;&lt; A.bounds[<span class="number">2</span>] - <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" d: 0 - "</span> &lt;&lt; A.bounds[<span class="number">3</span>] - <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cin</span> &gt;&gt; sub.a &gt;&gt; sub.b &gt;&gt; sub.c &gt;&gt; sub.d;</span><br><span class="line">						<span class="keyword">if</span> (sub2ind(A, sub, ind) == OK)</span><br><span class="line">						&#123;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">" 下标 A["</span> &lt;&lt; sub.a &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.b &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.c &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.d &lt;&lt; <span class="string">"]对应的索引值为: "</span> &lt;&lt; ind &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">"是否继续转换？（N键退出转换，其余键继续）:"</span>;</span><br><span class="line">							<span class="built_in">cin</span> &gt;&gt; ch;</span><br><span class="line">							<span class="keyword">if</span> (ch == <span class="string">'n'</span> || ch == <span class="string">'N'</span>)</span><br><span class="line">								<span class="keyword">break</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">" 您输入的下标值不符合要求，请重新输入"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (inso == <span class="number">7</span>)&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" 四维数组还未创建，请您前去创建四维数组！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" 请输入你要转换的索引值，范围： 0 - "</span> &lt;&lt;A.elemtotal<span class="number">-1</span>&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						<span class="built_in">cin</span> &gt;&gt; ind;</span><br><span class="line">						<span class="keyword">if</span> (ind2sub(A, ind, sub) == OK)</span><br><span class="line">						&#123;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">" 索引值: "</span> &lt;&lt; ind &lt;&lt; <span class="string">" 对应的下标未 A["</span> &lt;&lt; sub.a &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.b &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.c &lt;&lt; <span class="string">"]["</span> &lt;&lt; sub.d &lt;&lt; <span class="string">"] "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">"是否继续转换？（N键退出转换，其余键继续）:"</span>;</span><br><span class="line">							<span class="built_in">cin</span> &gt;&gt; ch;</span><br><span class="line">							<span class="keyword">if</span> (ch == <span class="string">'n'</span> || ch == <span class="string">'N'</span>)</span><br><span class="line">								<span class="keyword">break</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="built_in">cout</span> &lt;&lt; <span class="string">"您输入的索引值不符合范围，请重新输入"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (inso == <span class="number">8</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" 四维数组还未创建，请您前去创建四维数组！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">"执行降维操作"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">if</span> (squeeze(A, B) == ERROR) <span class="built_in">cout</span> &lt;&lt; <span class="string">"本数组无维数为1的维度，无法降维"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">					<span class="keyword">else</span></span><br><span class="line">					&#123;</span><br><span class="line">						creat = <span class="literal">true</span>;</span><br><span class="line">						ShowDate(B);</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (inso == <span class="number">9</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (A.elemtotal != <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					DestroyArray(A);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (creat == <span class="literal">true</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					DestroyArray(B);</span><br><span class="line">				&#125;</span><br><span class="line">				system(<span class="string">"cls"</span>);</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"  谢谢使用，再见！\n按任意键继续...."</span>;</span><br><span class="line">				_getch();</span><br><span class="line">				<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"您输入的字符有误，请重新输入"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<h3 id="另：一些注意事项"><a href="#另：一些注意事项" class="headerlink" title="另：一些注意事项"></a>另：一些注意事项</h3><ol>
+<li>数组的维界是严格大于0的，所以维界值要格外注意。</li>
+<li>本程序采用的是行优先存储方式创建的，对于所谓的列优先输出，因为列优先也就是高下标优先，所以按照高下标的遍历方式，依次将四维下标转换成一维基址(<code>sub2ind函数</code>)，然后输出。</li>
+<li>销毁空间时，如果那段空间本来就没有被 <code>malloc</code> 分配内存，就会报错，所以 <code>main.cpp</code> 中的流程9有两个判断语句。</li>
+<li>Array.h里定义的大部分函数返回值都是 <code>Status</code> ，这是为了便于 <code>main.cpp</code> 里的流程控制，因为判断数据是否正确写在 <code>main.cpp</code> 里回过于冗杂，也为了不让计算产生莫名奇妙的值，所以这些函数刚开始都是判断数据是否合理，不合理就不会继续进行计算。</li>
+<li>本程序的大部分函数都不可扩展，参数直接写死了，只能对四维坐标进行操作，尤其是数组被降维之后，对应 低于四维数组 的操作函数寥寥无几，设计函数是应当注意！</li>
+<li>消除孤维的时候要注意，如果都是1维，就要最后保留一个维度，为1维。</li>
+<li>关于 <code>ind2sub函数</code>（单一索引值转换成四维数组下标）的计算问题。刚开始稀里糊涂的写了上去，发现没啥问题，也没细想，写博客的时候又觉得有点不对劲，现在终于弄明白了。参看<code>函数sub2ind</code>的计算，简化式<code>ind = A * (constants[0]) + B * (constants[1]) + C*(constants[2]) + D *(constants[3]);</code>ABCD为四维数组下标。由此进行逆推，<code>A = ind / constants[0];</code>，那是因为其余部分的值<code>B * (constants[1]) + C*(constants[2]) + D *(constants[3])</code>除以 <code>constants[0]</code> 都要小于1。</li>
+</ol>
+<h2 id="功能展示"><a href="#功能展示" class="headerlink" title="功能展示"></a>功能展示</h2><p>比较辣鸡，展示部分功能。</p>
+<h3 id="起始界面"><a href="#起始界面" class="headerlink" title="起始界面"></a>起始界面</h3><p><img src="数据结构课课设———四维数组/起始界面.png" alt="起始界面"></p>
+<h3 id="创建四维数组"><a href="#创建四维数组" class="headerlink" title="创建四维数组"></a>创建四维数组</h3><p><img src="数据结构课课设———四维数组/创建四维数组.png" alt="创建四维数组"></p>
+<h3 id="查看当前数组信息"><a href="#查看当前数组信息" class="headerlink" title="查看当前数组信息"></a>查看当前数组信息</h3><p><img src="数据结构课课设———四维数组/查看当前数组信息.png" alt="查看当前数组信息"></p>
+<h3 id="下标转换为索引值"><a href="#下标转换为索引值" class="headerlink" title="下标转换为索引值"></a>下标转换为索引值</h3><p><img src="数据结构课课设———四维数组/下标转换为索引值.png" alt="下标转换为索引值"></p>
+<h3 id="降维操作"><a href="#降维操作" class="headerlink" title="降维操作"></a>降维操作</h3><p><img src="数据结构课课设———四维数组/降维操作.png" alt="降维操作"></p>
+<h2 id="完结感言"><a href="#完结感言" class="headerlink" title="完结感言"></a>完结感言</h2><p>本次课设的难度一般，想清楚该怎么做后，几个小时就可以做完。但与之相比，课设的报告书，还有这篇博客都是非常的费时间。自己也挺菜的，函数写成了那个样子，没法复用，也得感谢严蔚敏老师的《数据结构》提供了非常好的数据结构与方法，但是为了一些操作的方便就没有使用原书中的用到的<code>stdarg.h</code> 和变参方法。太菜了，继续努力吧！</p>
+<h2 id="END-2019-1-11-22-24-36"><a href="#END-2019-1-11-22-24-36" class="headerlink" title="END! 2019/1/11 22:24:36"></a>END! 2019/1/11 22:24:36</h2><hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/C++历史/" rel="next" title="C++一些相关知识（慢慢补充）">
+                <i class="fa fa-chevron-left"></i> C++一些相关知识（慢慢补充）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/12/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关概念"><span class="nav-number">2.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-行优先存储与列优先存储"><span class="nav-number">2.1.</span> <span class="nav-text">1.行优先存储与列优先存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-C语言多维数组的理解"><span class="nav-number">2.2.</span> <span class="nav-text">2.C语言多维数组的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-几个名词：维度、维界与孤维（未找到定义，自己的理解）"><span class="nav-number">2.3.</span> <span class="nav-text">3.几个名词：维度、维界与孤维（未找到定义，自己的理解）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与核心算法"><span class="nav-number">3.</span> <span class="nav-text">数据结构与核心算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">3.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心算法——映像函数"><span class="nav-number">3.2.</span> <span class="nav-text">核心算法——映像函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现代码"><span class="nav-number">4.</span> <span class="nav-text">实现代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Array-h"><span class="nav-number">4.1.</span> <span class="nav-text">Array.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array-cpp"><span class="nav-number">4.2.</span> <span class="nav-text">Array.cpp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-cpp"><span class="nav-number">4.3.</span> <span class="nav-text">main.cpp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另：一些注意事项"><span class="nav-number">4.4.</span> <span class="nav-text">另：一些注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能展示"><span class="nav-number">5.</span> <span class="nav-text">功能展示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#起始界面"><span class="nav-number">5.1.</span> <span class="nav-text">起始界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建四维数组"><span class="nav-number">5.2.</span> <span class="nav-text">创建四维数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前数组信息"><span class="nav-number">5.3.</span> <span class="nav-text">查看当前数组信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下标转换为索引值"><span class="nav-number">5.4.</span> <span class="nav-text">下标转换为索引值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#降维操作"><span class="nav-number">5.5.</span> <span class="nav-text">降维操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完结感言"><span class="nav-number">6.</span> <span class="nav-text">完结感言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END-2019-1-11-22-24-36"><span class="nav-number">7.</span> <span class="nav-text">END! 2019/1/11 22:24:36</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'MtnFjgPHU4QgDov26Ttd39aS-gzGzoHsz',
+        appKey: 'VxW97jqxtcjGJrb9AWmPKqrK',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊! Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

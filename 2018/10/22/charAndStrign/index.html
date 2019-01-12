@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="C++基础,">
 
 
 
@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="欢迎来访 Colourso’s Blog! 这是原Hexo自动产生的第一篇博文，在此我来做一些修改。">
+<meta name="description" content="问题的产生问题出在我上数据结构对串进行操作时需要对一段字符串的长度进行计算，当时卡住了壳，之后再次回顾时发现还是自己粗心大意，基础太差，所以再这里做一个总结归纳。">
+<meta name="keywords" content="C++基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/01/12/hello-world/index.html">
+<meta property="og:title" content="char* 、char[]、与string 的区别，以及求取字符串长度">
+<meta property="og:url" content="http://yoursite.com/2018/10/22/charAndStrign/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="欢迎来访 Colourso’s Blog! 这是原Hexo自动产生的第一篇博文，在此我来做一些修改。">
+<meta property="og:description" content="问题的产生问题出在我上数据结构对串进行操作时需要对一段字符串的长度进行计算，当时卡住了壳，之后再次回顾时发现还是自己粗心大意，基础太差，所以再这里做一个总结归纳。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-07T09:32:10.000Z">
+<meta property="og:updated_time" content="2019-01-11T08:04:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="欢迎来访 Colourso’s Blog! 这是原Hexo自动产生的第一篇博文，在此我来做一些修改。">
+<meta name="twitter:title" content="char* 、char[]、与string 的区别，以及求取字符串长度">
+<meta name="twitter:description" content="问题的产生问题出在我上数据结构对串进行操作时需要对一段字符串的长度进行计算，当时卡住了壳，之后再次回顾时发现还是自己粗心大意，基础太差，所以再这里做一个总结归纳。">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/12/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2018/10/22/charAndStrign/">
 
 
 
 
 
-  <title>Hello World | Hexo</title>
+  <title>char* 、char[]、与string 的区别，以及求取字符串长度 | Hexo</title>
   
 
 
@@ -274,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/22/charAndStrign/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -291,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">char* 、char[]、与string 的区别，以及求取字符串长度</h1>
         
 
         <div class="post-meta">
@@ -303,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T13:37:51+08:00">
-                2019-01-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-22T00:00:00+08:00">
+                2018-10-22
               </time>
             
 
@@ -314,6 +315,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index">
+                    <span itemprop="name">C/C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -322,8 +345,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/12/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/12/hello-world/" itemprop="commentCount"></span>
+                <a href="/2018/10/22/charAndStrign/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/22/charAndStrign/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -351,12 +374,22 @@
       
 
       
-        <p>欢迎来访 <a href="https://colourso.github.io/" target="_blank" rel="noopener">Colourso’s Blog</a>! 这是原<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>自动产生的第一篇博文，在此我来做一些修改。</p>
-<a id="more"></a>
-<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"Hello World!"</span>;</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class <span class="function"><span class="title">Main</span></span>()&#123;</span><br><span class="line">	public static void main(String[] args)&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="string">"Hello World!"</span>);</span><br></pre></td></tr></table></figure>
-<p>未完待续。。。</p>
+        <h2 id="问题的产生"><a href="#问题的产生" class="headerlink" title="问题的产生"></a>问题的产生</h2><p>问题出在我上数据结构对串进行操作时需要对一段字符串的长度进行计算，当时卡住了壳，之后再次回顾时发现还是自己粗心大意，基础太差，所以再这里做一个总结归纳。<br><a id="more"></a><br>这是我当初的代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getLength</span><span class="params">(<span class="keyword">char</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> length=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(;p!=<span class="string">'\0'</span>;p++)</span><br><span class="line">     length++;</span><br><span class="line">   <span class="keyword">return</span> length;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<p>我实际上调用的时<code>getLength(&quot;asdfg&quot;);</code>然后程序运行了好长一段时间，结果是一个巨大的负值。事实上是for循环的判断条件出错了。p是指针，直接用指针与字符<code>‘\0’</code>作比较会出现问题，所以会有这样的结果。<br>所以实际上可以说是少写了一个符号<code>*</code>导致的。所以正确的代码是</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getLength</span><span class="params">(<span class="keyword">char</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> length=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(;*p!=<span class="string">'\0'</span>;p++)</span><br><span class="line">     length++;</span><br><span class="line">   <span class="keyword">return</span> length;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
+<h2 id="char-、char-的区别"><a href="#char-、char-的区别" class="headerlink" title="char* 、char[]的区别"></a>char* 、char[]的区别</h2><ul>
+<li>char* 是字符型指针类型，用来声明一个变量是字符指针类型的。</li>
+<li>char[]则是一个字符数组，使用一段连续的内存空间存储多个字符。</li>
+</ul>
+<p>他们两个在普通地方差别挺明显的，而对于函数形参来说几乎没有区别。</p>
+<h3 id="普通位置时"><a href="#普通位置时" class="headerlink" title="普通位置时"></a>普通位置时</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*-----编译环境VC2010-----*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> a[] = &#123;<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'\0'</span>&#125;;</span><br><span class="line">	<span class="keyword">char</span> * b = <span class="string">"abc"</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;b&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	a[<span class="number">0</span>] = <span class="string">'s'</span>;</span><br><span class="line">	b[<span class="number">0</span>] = <span class="string">'s'</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<p>代码会在<code>b[0] = &#39;s&#39;;</code>处停止运行，发生错误，原因在于<code>char []</code> 与<code>char *</code>内存分区是不同的。字符数组<code>char[]</code>存放于_栈区_，<em>是可以进行读写操作的</em>。而<code>char *</code>所指向的字符串<code>abc</code>是存放于<em>文字常量区</em>的,<em>文字常量区</em>是不能更改的，<em>是只读区域</em>。所以尝试对其进行修改时就会报错。</p>
+<h3 id="作为函数参数时"><a href="#作为函数参数时" class="headerlink" title="作为函数参数时"></a>作为函数参数时</h3><blockquote>
+<p>当数组作为函数参数时，实际上传递的是数组首元素的地址。<br>即C++只是把形参数组名作为一个指针变量来处理，用来接收从实参传过来的地址。<br>——（谭浩强-C++程序设计第三版）</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//所以对于以下两个函数，完全的等价</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">char</span> a[])</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">char</span>* a)</span></span></span><br></pre></td></tr></table></figure> 
+<p>#char *c = “agdbh”; 存储的是字符串的首地址吗？</p>
 
       
     </div>
@@ -372,6 +405,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/C-基础/" rel="tag"># C++基础</a>
+          
+        </div>
+      
 
       
       
@@ -381,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/11/数据结构课课设———四维数组/" rel="next" title="数据结构课课设———四维数组">
-                <i class="fa fa-chevron-left"></i> 数据结构课课设———四维数组
+              <a href="/2018/10/12/categories/index/" rel="next" title="文章分类">
+                <i class="fa fa-chevron-left"></i> 文章分类
               </a>
             
           </div>
@@ -391,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/12/nihao-hexo/" rel="prev" title="nihao hexo">
-                nihao hexo <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/19/news/" rel="prev" title="2018年最后一月学习总结">
+                2018年最后一月学习总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -535,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C"><span class="nav-number">1.</span> <span class="nav-text">C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">2.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.</span> <span class="nav-text">JavaScript</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题的产生"><span class="nav-number">1.</span> <span class="nav-text">问题的产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-、char-的区别"><span class="nav-number">2.</span> <span class="nav-text">char* 、char[]的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通位置时"><span class="nav-number">2.1.</span> <span class="nav-text">普通位置时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为函数参数时"><span class="nav-number">2.2.</span> <span class="nav-text">作为函数参数时</span></a></li></ol></li></ol></div>
             
 
           </div>
