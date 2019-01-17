@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。">
+<meta name="description" content="这是我看了书籍之后抄写的大佬的笔记，仅供个人学习使用">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL的深入学习">
 <meta property="og:url" content="http://yoursite.com/2019/01/11/MySQL/index.html">
 <meta property="og:site_name" content="HERO">
-<meta property="og:description" content="这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。">
+<meta property="og:description" content="这是我看了书籍之后抄写的大佬的笔记，仅供个人学习使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-17T07:38:37.002Z">
+<meta property="og:updated_time" content="2019-01-17T07:42:12.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的深入学习">
-<meta name="twitter:description" content="这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。">
+<meta name="twitter:description" content="这是我看了书籍之后抄写的大佬的笔记，仅供个人学习使用">
 
 
 
@@ -374,9 +374,9 @@
       
 
       
-        <p>这是我的数据结构课程设计，搬运至博客做一份保存，也把弄清楚的一些知识记录下来。</p>
+        <p>这是我看了书籍之后抄写的大佬的笔记，仅供个人学习使用</p>
 <a id="more"></a>
-<h1 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h1><h3 id="B-树原理"><a href="#B-树原理" class="headerlink" title="B+树原理"></a>B+树原理</h3><h3 id="1-数据结构"><a href="#1-数据结构" class="headerlink" title="1.数据结构"></a>1.数据结构</h3><p><font face="黑体"><br>B  Tree指的是Balance Tree，也就是平衡树。平衡树是一棵查找树，并且所有叶子节点位于同一层。<br>B+树是基于B Tree和叶子节点顺序访问指针进行实现，它具有B Tree的平衡性，并且通过顺序访问指针来提高区间查询的性能。</font></p>
+<h1 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h1><h3 id="B-树原理"><a href="#B-树原理" class="headerlink" title="B+树原理"></a>B+树原理</h3><h3 id="1-数据结构"><a href="#1-数据结构" class="headerlink" title="1.数据结构"></a>1.数据结构</h3><p>B  Tree指的是Balance Tree，也就是平衡树。平衡树是一棵查找树，并且所有叶子节点位于同一层。<br>B+树是基于B Tree和叶子节点顺序访问指针进行实现，它具有B Tree的平衡性，并且通过顺序访问指针来提高区间查询的性能。</p>
 <p>在B Tree中，一个节点中的Key从左到右非递减排列，如果某个指针的左右相邻Key分别是Keyi和Keyi+1,且不为null，则该指针指向的所有Key大于等于keyi且小于keyi+1。 </p>
 <h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2.操作"></a>2.操作</h3><p>在进行查找操作时，首先在根节点进行二分查找，找到一个key所在的指针，然后递归地在指针所指向的节点进行查找，直到查找到叶子节点，然后在叶子节点上进行二分查找，找出key所对应的data。</p>
 <p>插入操作会破坏平衡树的平衡性，因此在插入删除操作之后，需要对树进行一个分裂、合并、旋转等操作来维护平衡性。 </p>
