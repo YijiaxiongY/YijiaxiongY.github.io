@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HERO" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="title: Mysql的深入学习date: 2019-01-11 13:26:12categories:  Mysqltags: Mysql分层、存储引擎   #一、索引 ###B+树原理 ###1.数据结构B  Tree指的是Balance Tree，也就是平衡树。平衡树是一棵查找树，并且所有叶子节点位于同一层。B+树是基于B Tree和叶子节点顺序访问指针进行实现，它具有B Tree的平衡性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HERO">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/2019115/index.html">
+<meta property="og:site_name" content="HERO">
+<meta property="og:description" content="title: Mysql的深入学习date: 2019-01-11 13:26:12categories:  Mysqltags: Mysql分层、存储引擎   #一、索引 ###B+树原理 ###1.数据结构B  Tree指的是Balance Tree，也就是平衡树。平衡树是一棵查找树，并且所有叶子节点位于同一层。B+树是基于B Tree和叶子节点顺序访问指针进行实现，它具有B Tree的平衡性">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-17T03:51:37.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HERO">
+<meta name="twitter:description" content="title: Mysql的深入学习date: 2019-01-11 13:26:12categories:  Mysqltags: Mysql分层、存储引擎   #一、索引 ###B+树原理 ###1.数据结构B  Tree指的是Balance Tree，也就是平衡树。平衡树是一棵查找树，并且所有叶子节点位于同一层。B+树是基于B Tree和叶子节点顺序访问指针进行实现，它具有B Tree的平衡性">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/2019115/">
+
+
+
+
+
+  <title> | HERO</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HERO</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collection">
+          <a href="/collection/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-angellist"></i> <br>
+            
+            collection
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/2019115/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HERO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HERO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T11:57:59+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/17/2019115/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/17/2019115/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id=""><a href="#" class="headerlink" title=""></a><font color="black" face="黑体"></font></h2><p>title: Mysql的深入学习<br>date: 2019-01-11 13:26:12<br>categories:</p>
+<ul>
+<li>Mysql<br>tags:</li>
+<li>Mysql分层、存储引擎</li>
+</ul>
+<hr>
+<p>#一、索引</p>
+<p>###B+树原理</p>
+<p>###1.数据结构<br>B  Tree指的是Balance Tree，也就是平衡树。平衡树是一棵查找树，并且所有叶子节点位于同一层。<br>B+树是基于B Tree和叶子节点顺序访问指针进行实现，它具有B Tree的平衡性，并且通过顺序访问指针来提高区间查询的性能。</p>
+<p>在B Tree中，一个节点中的Key从左到右非递减排列，如果某个指针的左右相邻Key分别是Keyi和Keyi+1,且不为null，则该指针指向的所有Key大于等于keyi且小于keyi+1。</p>
+<p>###2.操作<br>在进行查找操作时，首先在根节点进行二分查找，找到一个key所在的指针，然后递归地在指针所指向的节点进行查找，直到查找到叶子节点，然后在叶子节点上进行二分查找，找出key所对应的data。</p>
+<p>插入操作会破坏平衡树的平衡性，因此在插入删除操作之后，需要对树进行一个分裂、合并、旋转等操作来维护平衡性。</p>
+<p>###3.与红黑树的比较<br>红黑树等平衡树也可以用来实现索引，但是文件系统及数据库系统普遍采用B+树作为索引结构，主要有以下两个原因：<br>(-)更少的查找次数<br>平衡树查找操作的时间复杂度和树高h有关，O(h)=O(logdN),其中d为每个结点的出度。<br>红黑树的出度为2，而B+ Tree的出度一般都非常大，所以红黑树的树高h很明显比B+ Tree大非常多，查找的次数也就更多。<br>(-）为了减少磁盘I/O操作，磁盘往往不是严格按需读取，而是每次都会预读。预读过程中，磁盘进行顺序读取，顺序读取不需要进行磁盘寻道，并且只需要很短的旋转时间，速度会非常快。  </p>
+<p>操作系统一般将内存和磁盘分割成固定大小的块，每一块称为一页，内存与磁盘以页为单位交换数据。数据库系统与索引的一个节点的大小设置为页的大小，使得每一次I/O就能完全载入一个节点，并且可以利用预读特性，相邻的节点也能够被预先载入。  </p>
+<p>###Mysql索引<br>索引是在存储引擎实现的，而不是在服务器层实现的，所以不同存储引擎具有不同的索引类型和实现。  </p>
+<p>####1.B+Tree索引  </p>
+<p>是大多数Mysql存储引擎的默认索引类型  </p>
+<p>因为不再需要全表扫描，只需要对树进行搜索即可，所以查找速度快很多。  </p>
+<p>除了用于查找，还可以用于排序和分组。  </p>
+<p>可以指定多个列作为索引列，多个索引列共同组成键。  </p>
+<p>适用于全键值、键值范围和键前缀查找，其中键前缀查找只适用于最左前查找。如果不是按照索引列的顺序进行查找，则无法使用索引。<br>InnoDB的B+Tree索引分为主索引和辅助索引。主索引的叶子节点data域记录着完整的数据记录，这种索引方式被称为聚簇索引。因为无法把数据行存放在两个不同的地方，所以一个表只能由一个聚簇索引。<br>辅助索引的叶子节点的data域记录着主键的值，因此在使用辅助索引进行查找时，需要先查找到主键值，然后再到主索引中进行查找。  </p>
+<p>####2.哈希索引<br>哈希索引能以O(1)时间进行查找，但是失去了有序性： </p>
+<ul>
+<li>无法用于排序与分组；</li>
+<li>只支持精确查找，无法用于部分查找和范围查找；<br>InnoDB存储引擎有一个特殊的功能叫自适应哈希索引，当某个索引值被使用得非常频繁时，会在B+Tree索引之上再创建一个哈希索引，这样就B+Tree索引具有哈希索引的一些优点，比如快速的哈希查找。<br>####3.全文索引<br>MyISAM存储引擎支持全文索引，用于查找文本中的关键词，<br>查找条件是使用MATCH AGAINST，而不是普通的WHERE。<br>全文索引使用倒排索引实现，它记录着关键词到其所在文档的映射。<br>InnoDB存储引擎在MySql5.6.4版本也开始支持全文索引。<br>####4.空间数据索引<br>MyISAM存储引擎支持空间数据索引(R-Tree)，用于地理数据存储。空间数据索引会从所有维度来索引数据，可以有效的使用任意维度来进行组合查询。<br>必须使用GIS相关的函数来维护数据。<br>###索引优化<br>####1.独立的列<br>在进行查询时，索引列不能是表达式的一部分，也不能是函数的参数，否则无法使用索引。例如下面的查询不能使用actor_id列的索引：<br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">SELECT actor_id FROM sakila.actor WHERE actor_id+1=5;</font><br></td></tr></table><br>####2.多列索引<br>在需要使用多个列作为条件进行查询时，使用多列索引比使用单列索引性能更好。例如下面的语句中，最好把actor_id和film_id设置为多列索引。<br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">SELECT film_id, actor_id FROM sakila.actor WHERE actor_id=1 AND film_id=1;</font><br></td></tr></table><br>####3.索引列的顺序<br>让选择性最强的索引列放在前面。<br>索引的选择性是指：不重复的索引值和记录总数的比值。最大值为1，此时每个记录都有唯一的索引与其对应，选择性越高，查询效率也越高。<br>例如下面显示的结果中customer_id的选择性比staff_id更高，因此最好把customer_id列存放在多列索引的前面。<br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">SELECT COUNT(DISTINCT staff_id)/COUNT(<em>) AS staff_id_selectivity,<br>COUNT(DISTINCT customer_id)/COUNT(</em>) AS customer_id_selectivity,<br>COUNT(<em>)<br>FROM payment;</em></font><br></td></tr></table><br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">staff_id_selectivity:0.000  customer_id:0.373 COUNT():16049</font><br></td></tr></table><br>####4.前缀索引<br>对于BLOB、TEXT和VARCHAR类型的列，必须使用前缀索引，指索引开始的部分字符。<br>对于前缀长度的选取需要根据索引选择性来确定。<br>####5.覆盖索引<br>索引包含以下所有需要查询的字段的值。<br>具有以下优点： </li>
+</ul>
+<ul>
+<li>索引通常小于数据行的大小，只读取索引能大大减少数据访问量；</li>
+<li>一些存储引擎（例如MyISAM)在内存中只缓存索引，而数据依赖于操作系统来缓存。因此，只访问索引可以不使用系统调用（通常比较费时）。  </li>
+<li><p>对于InnoDB引擎，若辅助索引能够覆盖查询，则无需访问主索引。<br>###索引的优点</p>
+</li>
+<li><p>大大减少了服务器需要扫描的数据行数。</p>
+</li>
+<li>帮助服务器进行排序和分组，以及避免创建临时表（B+Tree索引是有序的，可以用于ORDER BY 和GROUP BY 操作。临时表主要是排序和分组过程中创建，因为不需要排序和分组，也就不需要创建临时表）。</li>
+<li><p>将随机I/O变为顺序I/O，（B+Tree索引是有序的，会将相邻的数据都存储在一起）。<br>###索引的使用条件 </p>
+</li>
+<li><p>对于非常小的表，大部分情况下简单的全表扫描比建立索引更高效；</p>
+</li>
+<li>对于中到大型的表，索引就非常有效；</li>
+<li><p>但是对于特大型的表，建立和维护索引的代价会随之增长，这种情况下，需要用到一种技术可以直接区分出需要查询的一组数据，而不是一条记录一条记录地匹配，例如可以使用分区技术。<br>#二、查询性能优化<br>###使用Explain进行分析<br>Explain用来分析SELECT查询语句，开发人员可以通过分析Explain结果来优化查询语句。<br>比较重要的字段有：</p>
+</li>
+<li><p>select_type:查询类型，有简单查询、联合查询、子查询等</p>
+</li>
+<li>key：使用的索引</li>
+<li>rows：扫描的行数<br>###优化数据访问<br>####1.减少请求的数据量  </li>
+<li>只返回必要的列：最好不使用SELECT*语句。</li>
+<li>只返回必要的行：使用Limit语句来限制返回的数据。</li>
+<li><p>缓存重复查询的数据：使用缓存可以避免在数据库中进行查询，特别是在要查询的数据经常被重复查询时，缓存带来的查询性能提升将会是非常明显的。<br>####2.减少服务端扫描的行数<br>最有效的方式时使用索引来覆盖查询。<br>###重构查询方式<br>####1.切分大查询<br>一个大查询如果一次性执行的话，可能一次锁住很多数据，占满整个事务日志、耗尽系统资源、阻塞很多小但重要的查询。<br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">DELETE FROM message WHERE create &lt; DATE_SUB(NOW(),INTERVAL 3 MONTH);</font><br></td></tr></table><br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">  rows_affected=0<br>do{<br>rows_affected=do_query{<br>“DELETE FROM message WHERE create &lt; DATE_SUB(NOW(),INTERVAL 3 MONTH) LIMIT 10000”)}while rows_affected &gt; 0;<br></font><br></td></tr></table><br>####2.分解大连接查询<br>将一个大连接查询分解成对每一个表进行一次单表查询，然后在应用程序中进行关联，这样做的好处有：   </p>
+</li>
+<li><p>让缓存更高效，对于连接查询，如果其中一个表发生变化，那么整个查询缓存就无法使用。而分解后的多个查询，即使其中一个表发生变化，对其他表的查询缓存依旧可以使用。</p>
+</li>
+<li>分解成多个单表查询，这些单表查询的缓存结果更可能被其他查询使用到，从而减少多余记录的查询</li>
+<li>减少锁竞争</li>
+<li>在应用层进行连接，可以更容易对数据库进行拆分，从而更容易做到高性能和可伸缩</li>
+<li>查询本身效率也可能会有所提升。例如下面的例子中，使用IN（）代替连接查询，可以让MYSQL按照ID顺序进行查询，这可能比随机的连接更高效。<br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">SELECT <em> FROM tab<br>JOIN tag_post ON tag_post.tag_id=tag.id JOIN post ON tag_post.post_id=post.id WHERE tag.tag=’mysql’</em></font><br></td></tr></table><br><table><tr><td bgcolor="black"><br><font face="Consolas" font="" size="3" color="#F8F8F2">SELECT  FROM tag WHERE tag=’mysql’;<br>SELECT <em> FROM tag_post WHERE tag_id=1234;<br>SELECT </em> FROM post WHERE post.id IN(123,456,567,9098,8094);</font><br></td></tr></table><br>#三、存储引擎<br>###InnoDB<br>是MySQL默认的事务型存储引擎，只有再需要它不支持的特性时，才考虑使用其他存储引擎。<br>实现了四个标准的隔离级别，默认级别是可重复读（REPEATABLE READ)。在可重复读隔离级别下，通过多版本并发控制（MVCC）和间隙锁（Next_Key Locking)防止幻影读。 </li>
+</ul>
+<p>主索引是聚簇索引，在索引中保存了数据，从而避免直接读取磁盘，因此对查询性能有很大的提升。 </p>
+<p>内部做了很多优化，包括从磁盘读取数据时采用的可预测性读、能够加快读操作并且自动创建的自适应哈希索引、能够加速插入操作的插入缓冲区等。 </p>
+<p>支持真正的在线热备份。其他存储引擎不支持在线热备份，要获取一致性视图要停止对所有表的写入，而在读写混合场景中，停止写入可能也意味着停止读取。  </p>
+<p>###MyISAM<br>设计简单，数据以紧密格式存储。对于只读数据，或者表比较小、可以容忍修复操作，则依然可以使用它。   </p>
+<p>提供了大量的特性，包括压缩表、空间数据索引等。   </p>
+<p>不支持事务。  </p>
+<p>不支持行级锁，只能对整张表加锁，读取时会对需要读到的所有表加共享锁，写入时则对表加排他锁。但是在表有读取操作的同时，也可以往表中插入新的记录，这被称为并发插入（CONCURRENT INSERT)。  </p>
+<p>可以手工或者自动执行检查和修复操作，但是和事务修复以及崩溃恢复不同，可能导致一些数据丢失，而且修复操作是非常慢的。 </p>
+<p>如果指定了DELAY_KEY_WRITE选项，在每次修改执行完成时，不会立即将修改的索引数据写入磁盘，而是会写到内存中的键缓冲区，只有在清理缓冲区和关闭表的时候才会将对应的索引块写入磁盘。这种方式可以极大地提升写入性能，但是在数据库或者主机崩溃时会造成索引损坏，需要执行修复操作。  </p>
+<p>###比较  </p>
+<ul>
+<li>事务：InnoDB是事务型的，可以使用Commit和Rollback语句。</li>
+<li>并发：MyISAM支持表级锁，而InnoDB还支持行级锁。</li>
+<li>外键：InnoDB支持外键。</li>
+<li>备份：InnoDB支持在线热备份。</li>
+<li>崩溃恢复：MyISAM崩溃后发生损坏的概率比InnoDB高很多，而且恢复的速度也很慢。</li>
+<li>其他特性：MyISAM支持前向压缩表和空间数据索引。<br>#四、数据类型<br>###整型<br>TINYINT,SMALLINT,MEDIUMINT,INT,BIGINT分别使用8，16，24，32，64位存储空间，一般情况下越小的列越好。INT(11)中的数字只是规定了交互工具显示字符的个数，对于存储和计算说是没有意义的。<br>###浮点数<br>FLOAT和DOUBLE为浮点类型，DECIMAL为高精度小数类型。CPU原生支持浮点运算，但是不支持DECIMAL类型的运算，因此DECIMAL的计算比浮点类型需要更高的代价。<br>FLOAT、DOUBLE和DECIMAL都可以指定列宽，例如DECIMAL(18,9)表示总共18位，取9位存储小数部分，剩下9位存储小数部分。<br>###字符串<br>主要有CHAR和VARCHAR两种类型，一种是定长的，一种是变长的。<br>VARCHAR这种变长类型能够节省空间，因为只需要存储必要的内容。但是在执行UPDATE时可能会使行变得原来长，当超出一个页所能容纳的大小时，就要执行额外的操作。MyISAM会将行拆成不同的片段存储，而InnoDB则需要分裂页使行放进页内。<br>在进行存储和检索时，会保留VARCHAR末尾的空格，而会删除CHAR末尾的空格。<br>###时间和日期<br>MySQL提供了两种相似的日期时间类型：DATETIME和TIMESTAMP。<br>####1.DATETIME<br>能够保存从1001年到9999年的日期和时间，精度为秒，使用8字节的存储空间。  </li>
+</ul>
+<p>它与时区无关。  </p>
+<p>默认情况下，MySQL以一种可排序的、无歧义的格式显示DATETIME值，例如”2008-01-16 22:37:08”,这是ANSI标准定义的日期和时间表示方法。  </p>
+<p>####2.TIMESTAMP<br>和UNIX时间戳相同，保存从1970年1月1日午夜（格林威治时间）以来的秒数，使用4个字节，只能表示从1970年到2038年。 </p>
+<p>它和时区有关，也就是说一个时间戳在不同的时区所代表的具体时间是不同的。 </p>
+<p>MySQL提供了FROM_UNIXTIME()函数把UNIX时间戳转换为日期，并提供了UNIX_TIMESTAMP函数把日期转换为UNIX时间戳。<br>默认情况下，如果插入时没有指定TIMESTAMP列的值，会将这个值设置为当前时间。<br>应该尽量使用TIMESTAMP，因为它比DATETIME空间效率更高。 </p>
+<p>#五、切分</p>
+<p>####水平切分<br>水平切分又称为Sharding，它是将同一个表中的记录拆分到多个结构相同的表中。  </p>
+<p>当一个表的数据不断增多时，Sharding是必然的选择，它可以将数据分布到集群的不同节点上，从而缓存单个数据库的压力。  </p>
+<p>###垂直切分<br>垂直切分是将一张表按列切分成多个表，通常是按照列的关系密集程度进行切分，也可以利用垂直切分将经常被使用的列和不经常被使用的列切分到不同的表中。   </p>
+<p>在数据库的层面使用垂直切分将按数据库中表的密集程度部署到不同的库中，例如将原来的电商数据库垂直切分成商品数据库、用户数据库等。  </p>
+<p>###Sharding策略</p>
+<ul>
+<li>哈希取模：hash(key)%N;</li>
+<li>范围：可以是ID范围也可以是时间范围;</li>
+<li>映射表：使用单独的一个数据库来存储映射关系。<br>###Sharding存在的问题<br>####1.事务问题<br>使用分布式事务来解决，比如XA接口。<br>####2.连接<br>可以将原来的连接分解成多个单表查询，然后在用户程序中进行连接。<br>####3.ID唯一性 </li>
+<li>使用全局唯一ID(GUID)</li>
+<li>为每一个分片指定一个ID范围</li>
+<li><p>分布式ID生成器(如Twitter的snowflake算法)<br>#六、复制<br>###主从复制<br>主要涉及三个线程：binlog线程、I/O线程和SQL线程。 </p>
+</li>
+<li><p>binlog线程：负责将主服务器上的数据更改写入二进制文件(Binary log)中。</p>
+</li>
+<li>I/O线程：负责从主服务器上读取二进制文件，并写入从服务器的重放日志(Replay log)中。</li>
+<li>SQL线程：负责读取重放日志并重放其中的SQL语句。<br>###读写分离<br>主服务器处理写操作以及实时性要求比较高的读操作，而从服务器处理读操作。  </li>
+</ul>
+<p>读写分能提高性能的原因在于： </p>
+<ul>
+<li>主从服务器负责各自的读和写，极大程度缓解了锁的争用；</li>
+<li>从服务器可以使用MyISAM，提升查询性能以及节约系统开销;</li>
+<li>增加冗余，提高可用性；<br>读写分离常用代理方式实现，代理服务器接受应用层传来的读写请求，然后决定转发到哪个服务器。</li>
+</ul>
+<p>参考资料：</p>
+
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------���Ľ���<i class="fa fa-paw"></i>��л�����Ķ�-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/11/数据结构课课设———四维数组/" rel="next" title="数据结构课课设———四维数组">
+                <i class="fa fa-chevron-left"></i> 数据结构课课设———四维数组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">HERO</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HERO</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'xrknlHiIDfURuvb7tAqEBgad-gzGzoHsz',
+        appKey: 'DRshAPVYKIEv1a75g2zqb2zW',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊! Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"20 left","width":110,"height":330},"mobile":{"show":true}});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
